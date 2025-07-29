@@ -16,11 +16,11 @@ app.use(cors({
 }));
 
 const pool = new Pool({
-  user: process.env.DB_USER,
+  user: "admin",
   host: '137.184.58.132',
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  database: "stackcomposer",
+  password: "admin1234",
+  port: "1000",
 });
 
 // Crear tabla si no existe
