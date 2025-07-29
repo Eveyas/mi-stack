@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3268:4000"
+    environment:
+      DB_HOST: bd
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    networks:
+      - app-network
+    depends_on:
+      - bd
+
+  dashboard:
+    build: ./dashboard
+    ports:
+      - "4139:80"
+    networks:
+      - app-network
+    depends_on:
+      - api
+
+  bd:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  pgdata: {}
