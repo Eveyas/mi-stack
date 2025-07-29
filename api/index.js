@@ -10,7 +10,7 @@ const cors = require('cors');
 // Middleware para parsear JSON
 app.use(bodyParser.json());
 app.use(cors({
-  origin: 'http://localhost:5000',
+  origin: '*',
   methods: ['GET', 'POST'],
   credentials: true
 }));
